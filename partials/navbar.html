@@ -1,7 +1,10 @@
 <div ng-controller="NavCtrl">
 	<header id="header" ng-controller="NavCtrl">
 		<span>
-			<a href="#" ng-click="login()">Login</a>
+			<a href="#" ng-click="login()" ng-hide="loggedIn">Login</a>
+		</span>
+		<span>
+			<a href="#" ng-click="logout()" ng-hide="loggedIn">Logout</a>
 		</span>
 	</header>
 </div>
