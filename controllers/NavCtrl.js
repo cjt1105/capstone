@@ -1,39 +1,35 @@
 app.controller("NavCtrl", function($scope, userFactory, $q){
-	$scope.login = userFactory.login;
+
+	$scope.isUser = {loggedin: false}
+
+	$scope.login = function(){
+		let provider = new firebase.auth.FacebookAuthProvider();
+		firebase.auth().signInWithPopup(provider).then(function(result){
+				console.log("user", result.user)
+		});
+	};
+
+
 	$scope.logout = function(){
-		firebase.auth().signOut().then(function(){
-			$scope.checkIfLoggedIn();
+		firebase.auth().signOut().then(function(user){
+			// $scope.checkIfLoggedIn();
+			// $scope.isUser.loggedin = false;
 			console.log('Signed Out');
 		})
 	}
-	$scope.loggedIn = "hey";
-	$scope.loggedIn = userFactory.checkIfLoggedIn();
-	// console.log('jnrfrfnrjfn', userFactory.checkIfLoggedIn)
-	console.log('scop',userFactory.checkIfLoggedIn() )
 
-
-// 	checkIfLoggedIn($scope);
-// 	function checkIfLoggedIn($scope){
-// 		$q(function(resolve, reject){
-// 			let user = firebase.auth().currentUser;
-// 			resolve(user);
-// 		}).then(function(user){
-// 			console.log(user);
-// 			if (user){
-// 				loggedin = true;
-// 				console.log(loggedin)
-// 				return loggedin
-// 			}
-// 			else {
-// 				let loggedin = false;
-// 				console.log(loggedin)
-// 				return loggedin
-
-// 			}
-// 		}).then(function(loggedin){
-// 			$scope.loggedIn = loggedin
-// 		})
-// 	}
-
-// return checkIfLoggedIn
+	firebase.auth().onAuthStateChanged(function(user){
+		if(user){
+			$scope.$apply(function(){
+				$scope.loggedin = true;
+				console.log("what", $scope.loggedin);
+			})
+		}
+		else {
+			$scope.$apply(function(){
+				$scope.loggedin = false;
+				console.log("what", $scope.loggedin);
+			})
+		}
+	})
 });
