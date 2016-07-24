@@ -8,5 +8,9 @@ app.config(function($routeProvider) {
         templateUrl: "partials/messages.html",
         controller: 'MessagesCtrl'
     }).
-    otherwise('/');
+    when('/home', {
+        templateUrl: "partials/home.html",
+        controller: 'HomeCtrl'
+    }).
+    otherwise('/home');
 });

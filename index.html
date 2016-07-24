@@ -5,19 +5,16 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Cohort Whatever</title>
 	<link rel="stylesheet" href="styles/main.css">
+	<script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 <body ng-app="CohortWhatever">
 
 	<div ng-include="'/partials/navbar.html'"></div>
-
-	<h1>Hi</h1>
-
 	<div id="container">
 		<div ng-view></div>
 	</div>
 
 
-	<script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="lib/bower_components/jquery-ui/jquery-ui.min.js"></script>
 	<script src="lib/bower_components/angular/angular.js"></script>
 	<script src="lib/bower_components/angular-route/angular-route.min.js"></script>
@@ -25,8 +22,11 @@
 	<script src="controllers/NavCtrl.js"></script>
 	<script src="lib/bower_components/firebase/firebase.js"></script>
 	<script src="factories/UserFactory.js"></script>
-	<script ng-include src="partials/fireinit.html"></script>
+	<script src="lib/bower_components/typed.js/dist/typed.min.js"></script>
+	<script src="controllers/HomeCtrl.js"></script>
 	<script src="controllers/MessagesCtrl.js"></script>
+	<script ng-include src="partials/fireinit.html"></script>
+
 
 </body>
 </html>
