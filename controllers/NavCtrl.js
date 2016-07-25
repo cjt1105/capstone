@@ -7,16 +7,31 @@ app.controller("NavCtrl", function($scope, userFactory, $q){
 		let provider = new firebase.auth.FacebookAuthProvider();
 		firebase.auth().signInWithPopup(provider).then(function(result){
 				currentUser = result.user;
+				let userExists = null;
 				userFactory.getUserList()
 				.then(function(userList){
 					for(user in userList){
 						let userItem = userList[user];
 						if(currentUser.uid === userItem.uid){
 							console.log("user exists");
+							userExists = true;
+							console.log(userItem)
 							$scope.currentUser.push(userItem);
+						} else {
+							userExists = false;
 						}
 					}
-
+					if(userExists === false){
+						let uid = currentUser.uid;
+						let name = currentUser.displayName;
+						let photo = currentUser.photoURL;
+						let newUser = {
+							name: name ,
+							profilePicture: photo,
+							uid: uid
+						};
+						userFactory.createUser(newUser, uid)
+					}
 				})
 
 		});
