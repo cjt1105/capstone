@@ -22,3 +22,10 @@
 .type {
 	display: inline;
 }
+#inputContainer {
+	float: bottom;
+}
+#messageContainer {
+	background: red;
+	min-height: 400px;
+}
