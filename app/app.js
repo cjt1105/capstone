@@ -12,5 +12,9 @@ app.config(function($routeProvider) {
         templateUrl: "partials/home.html",
         controller: 'HomeCtrl'
     }).
+    when('/jobs', {
+        templateUrl: "partials/jobs.html",
+        controller: 'JobCtrl'
+    }).
     otherwise('/home');
 });

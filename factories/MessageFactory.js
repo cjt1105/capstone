@@ -18,5 +18,8 @@ app.factory('messages', function($q, $http, firebaseUrl){
       })
     });
 	}
+	let postMessage = function(){
+
+	}
 	return {getMessageList}
 })
