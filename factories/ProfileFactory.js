@@ -1,13 +1,16 @@
 app.factory("profile", function($http, firebaseUrl, $q, $routeParams){
 
-	let uid = $routeParams.id;
 
-	getUser = function(){
+	getUser = function(array){
+		let uid = $routeParams.id;
 		return $q(function(resolve, reject){
+			console.log("heyyyy", uid);
 			$http.get(`${firebaseUrl}/users.json?orderBy="uid"&equalTo="${uid}"`)
 			.success(function(user){
-				let key = Object.keys(user)
+				let key = Object.keys(user);
+				console.log(key)
 				resolve(user[key]);
+				array.push(key);
 			})
 			.error(function(error) {
 				reject(error);
@@ -15,34 +18,24 @@ app.factory("profile", function($http, firebaseUrl, $q, $routeParams){
 		});
 	}
 
+	// let editUser = function(changes){
+	// 	$http.patch(`${firebaseUrl}/users.json?orderBy="uid"&equalTo="${uid}"`, JSON.stringify({"hey": "hello"}))
+	// }
+
+	let editUser = function(key, changes) {
+		console.log(changes)
+		return $q(function(resolve, reject) {
+            $http.patch(`${firebaseUrl}/users/${key}.json`, changes)
+                .success(function(ObjFromFirebase) {
+                    console.log(ObjFromFirebase)
+                    resolve(ObjFromFirebase)
+                })
+                .error(function (error) {
+                    reject (error);
+                });
+        });
+	}
 
 
-
-	// let getBoards = function() {
-	// 	let board = [];
-	// 	return $q(function(resolve, reject) {
-	// 		let currentUser = localStorageService.get('currentUser');
-	// 		console.log(currentUser);
-	// 		let userId = currentUser.uid
-	// 		console.log("user id?", userId);
-	// 		$http.get(`${FirebaseURL}/board.json?orderBy="uid"&equalTo="${userId}"`)
-	// 		.success(function(boardObject) {
-	// 			let boardCollection = boardObject;
-	// 			//create array from object and loop thru keys - saving fb key for each item inside the obj as an id property
-	// 			Object.keys(boardCollection).forEach(function(key){
-	// 				boardCollection[key].id=key;
-	// 				board.push(boardCollection[key]);
-	// 			});
-	// 			console.log("items:", board);
-	// 			resolve(board);
-	// 		})
-	// 		.error(function(error) {
-	// 			reject(error);
-	// 		});
-	// 	});
-	// };
-
-
-
-	return {getUser}
+	return {getUser, editUser}
 })

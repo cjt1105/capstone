@@ -1,4 +1,18 @@
 <div>
-	<h1>{{userName}}</h1>
-	<img ng-src="{{profilePicture}}" alt="">
+	<h1>{{user.name}}</h1>
+	<div><button ng-show="canEdit" ng-click="editProfile = true">Edit Profile</button></div>
+	<img ng-src="{{user.profilePicture}}" alt="">
+	<div>
+		<div>About me:</div>{{user.aboutMe}}
+		<div> <input ng-model="aboutMe" type="text" ng-show="editProfile"> </div>
+	</div>
+	<div>
+		<div>Github:</div>
+		<div> <input ng-model="github" type="text" ng-show="editProfile"> </div>
+	</div>
+	<div>
+		<div>Personal Website:</div>
+		<div> <input ng-model="personalWebsite" type="text" ng-show="editProfile"> </div>
+	</div>
+	<div><button ng-show="editProfile" ng-click= "saveChanges()">Save Changes</button></div>
 </div>

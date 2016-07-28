@@ -22,7 +22,7 @@ app.factory('userFactory', function($q, $http, firebaseUrl){
       })
     });
 	}
-	  let createUser = function(newUser,uid) {
+	  let createUser = function(newUser) {
     return $q(function(resolve, reject) {
       $http.post(`${firebaseUrl}/users.json`, ////////this posts to FB database///////////
         JSON.stringify(newUser))
@@ -38,6 +38,7 @@ app.factory('userFactory', function($q, $http, firebaseUrl){
 	let getCurrentUser = function(){
 		let user = firebase.auth().currentUser;
 	};
+
 	return { getCurrentUser, getUserList, createUser}
 	})
 

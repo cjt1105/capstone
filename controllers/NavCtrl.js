@@ -1,5 +1,6 @@
 app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService){
-	$scope.currentUser = [];
+	$scope.currentUser = localStorageService.get("currentUser");
+	$scope.userExists = false;
 
 	/// login function that creates new user if they don't exist in the database
 	/// and saves the current
@@ -7,31 +8,37 @@ app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService)
 		let provider = new firebase.auth.FacebookAuthProvider();
 		firebase.auth().signInWithPopup(provider).then(function(result){
 				currentUser = result.user;
-				$scope.userExists = false;
 				userFactory.getUserList()
 				.then(function(userList){
 					for(user in userList){
 						let userItem = userList[user];
-						console.log(userItem)
-						if(currentUser.uid === userItem.uid){
-							console.log("user exists");
+						if(currentUser.uid === userItem){
 							$scope.userExists = true;
+							console.log($scope.userExists)
 						}
+
 					}
+
 				})
 				.then(function(){
-					if($scope.userExists === false){
-						let uid = currentUser.uid;
-						let name = currentUser.displayName;
-						let photo = currentUser.photoURL;
-						let newUser = {
-							name: name ,
-							profilePicture: photo,
-							uid: uid
-						};
-						userFactory.createUser(newUser, uid)
-					}
+					watchLogin()
 				})
+				// .then(function(){
+				// 	console.log($scope.userExists)
+				// 	if ($scope.userExists === false){
+				// 		let name= currentUser.displayName;
+				// 		let email= currentUser.email;
+				// 		let uid= currentUser.uid;
+				// 		let profilePicture = currentUser.photoURL;
+				// 		let newUser = {
+				// 			name: name,
+				// 			email: email,
+				// 			uid: uid,
+				// 			profilePicture: profilePicture
+				// 		}
+				// 		userFactory.createUser(newUser);
+				// 	}
+				// })
 
 		});
 	};
@@ -42,18 +49,22 @@ app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService)
 		})
 	}
 /// watch Auth state and set logged in value to toggle sign in/sign out buttons
-	firebase.auth().onAuthStateChanged(function(user){
-		if(user){
-			$scope.$apply(function(){
-				$scope.loggedin = true;
-			})
-			localStorageService.set("currentUser", user);
-		}
-		else {
-			$scope.$apply(function(){
-				$scope.loggedin = false;
-			})
-			localStorageService.set("currentUser", "null");
-		}
-	})
+	watchLogin();
+	function watchLogin(){
+		firebase.auth().onAuthStateChanged(function(user){
+			if(user){
+				$scope.$apply(function(){
+					$scope.loggedin = true;
+				})
+				localStorageService.set("currentUser", user)
+			}
+			else {
+				$scope.$apply(function(){
+					$scope.loggedin = false;
+				})
+				localStorageService.set("currentUser", "null")
+			}
+		})
+	}
+
 });
