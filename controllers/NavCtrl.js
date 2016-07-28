@@ -1,5 +1,5 @@
 app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService){
-	$scope.currentUser = localStorageService.get("currentUser");
+
 	$scope.userExists = false;
 
 	/// login function that creates new user if they don't exist in the database
@@ -55,7 +55,9 @@ app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService)
 				$scope.$apply(function(){
 					$scope.loggedin = true;
 				})
-				localStorageService.set("currentUser", user)
+				localStorageService.set("currentUser", user);
+				$scope.currentUser = localStorageService.get("currentUser");
+
 			}
 			else {
 				$scope.$apply(function(){
