@@ -12,9 +12,8 @@ app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService)
 				.then(function(userList){
 					for(user in userList){
 						let userItem = userList[user];
-						if(currentUser.uid === userItem){
+						if(currentUser.uid === userItem.uid){
 							$scope.userExists = true;
-							console.log($scope.userExists)
 						}
 
 					}
@@ -23,22 +22,22 @@ app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService)
 				.then(function(){
 					watchLogin()
 				})
-				// .then(function(){
-				// 	console.log($scope.userExists)
-				// 	if ($scope.userExists === false){
-				// 		let name= currentUser.displayName;
-				// 		let email= currentUser.email;
-				// 		let uid= currentUser.uid;
-				// 		let profilePicture = currentUser.photoURL;
-				// 		let newUser = {
-				// 			name: name,
-				// 			email: email,
-				// 			uid: uid,
-				// 			profilePicture: profilePicture
-				// 		}
-				// 		userFactory.createUser(newUser);
-				// 	}
-				// })
+				.then(function(){
+					if ($scope.userExists === false){
+						let name= currentUser.displayName;
+						let email= currentUser.email;
+						let uid= currentUser.uid;
+						let profilePicture = currentUser.photoURL;
+						let newUser = {
+							name: name,
+							email: email,
+							uid: uid,
+							profilePicture: profilePicture
+						}
+						console.log("mycurrent", currentUser)
+						userFactory.createUser(newUser);
+					}
+				})
 
 		});
 	};
