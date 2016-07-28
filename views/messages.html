@@ -1,0 +1,13 @@
+<div id="messageContainer">
+	<div ng-repeat="message in messageList">
+		<img ng-src="{{message.userPicture}}">
+		<a ng-href="#/profile/{{message.uid}}" >{{message.userName}}</a>
+		<div>
+			<img ng-show="{{message.isMedia}}" ng-src="{{message.mediaSource}}">
+			<iframe ng-show="{{message.isYoutube}}"width="560" height="315" ng-src="{{getIframeSrc(message.youtubeKey)}}" frameborder="0" allowfullscreen></iframe>
+			{{message.text}}
+		</div>
+	</div>
+</div>
+
+	<textarea  ng-model="userMessage" ng-enter="sendMessage()" id="userInput"></textarea>

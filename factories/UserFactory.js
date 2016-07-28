@@ -3,9 +3,11 @@ app.factory('userFactory', function($q, $http, firebaseUrl){
 
 	let getUserList = function(){
 		let users = [];
+		let currentUid = firebase.auth().currentUser.uid;
     return $q(function(resolve, reject) {
       $http.get(`${firebaseUrl}/users.json`)
       .success(function(usersArray) {
+      	console.log(usersArray)
         if (usersArray) {
         let userList = usersArray;
         Object.keys(userList).forEach(function(key) {
@@ -19,11 +21,10 @@ app.factory('userFactory', function($q, $http, firebaseUrl){
         reject(error);
       })
     });
-
 	}
 	  let createUser = function(newUser,uid) {
     return $q(function(resolve, reject) {
-      $http.post(`${firebaseUrl}/users/${uid}/userInfo.json`, ////////this posts to FB database///////////
+      $http.post(`${firebaseUrl}/users.json`, ////////this posts to FB database///////////
         JSON.stringify(newUser))
       .success(function(ObjFromFirebase) {
         resolve(ObjFromFirebase)    ////////this posts to FB database///////////

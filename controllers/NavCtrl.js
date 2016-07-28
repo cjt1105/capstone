@@ -1,4 +1,4 @@
-app.controller("NavCtrl", function($scope, userFactory, $q){
+app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService){
 	$scope.currentUser = [];
 
 	/// login function that creates new user if they don't exist in the database
@@ -7,21 +7,20 @@ app.controller("NavCtrl", function($scope, userFactory, $q){
 		let provider = new firebase.auth.FacebookAuthProvider();
 		firebase.auth().signInWithPopup(provider).then(function(result){
 				currentUser = result.user;
-				let userExists = null;
+				$scope.userExists = false;
 				userFactory.getUserList()
 				.then(function(userList){
 					for(user in userList){
 						let userItem = userList[user];
+						console.log(userItem)
 						if(currentUser.uid === userItem.uid){
 							console.log("user exists");
-							userExists = true;
-							console.log(userItem)
-							$scope.currentUser.push(userItem);
-						} else {
-							userExists = false;
+							$scope.userExists = true;
 						}
 					}
-					if(userExists === false){
+				})
+				.then(function(){
+					if($scope.userExists === false){
 						let uid = currentUser.uid;
 						let name = currentUser.displayName;
 						let photo = currentUser.photoURL;
@@ -48,11 +47,13 @@ app.controller("NavCtrl", function($scope, userFactory, $q){
 			$scope.$apply(function(){
 				$scope.loggedin = true;
 			})
+			localStorageService.set("currentUser", user);
 		}
 		else {
 			$scope.$apply(function(){
 				$scope.loggedin = false;
 			})
+			localStorageService.set("currentUser", "null");
 		}
 	})
 });
