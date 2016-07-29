@@ -1,16 +1,18 @@
-<div>
-	<h1>Cohort Whatever</h1>
-	<h3 class="type"></h3>
+<div class="home-container">
+  <div>
+  	<h1>Cohort Whatever</h1>
+  	<h3 class="type"></h3>
+  </div>
+  <script>
+    $(function(){
+        $(".type").typed({
+            strings: ["Post GIF's", "Post Jobs", "Make puns about Mountain Dew"],
+            typeSpeed: 50,
+            showCursor: true,
+            cursorChar: '|',
+            loop: true,
+            loopCount: 10
+        });
+    });
+  </script>
 </div>
-<script>
-  $(function(){
-      $(".type").typed({
-          strings: ["Post GIF's", "Post Jobs", "Make puns about Mountain Dew"],
-          typeSpeed: 50,
-          showCursor: true,
-          cursorChar: '|',
-          loop: true,
-          loopCount: 10
-      });
-  });
-</script>

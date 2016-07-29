@@ -7,11 +7,11 @@
 		<div> <input ng-model="aboutMe" type="text" ng-show="editProfile"> </div>
 	</div>
 	<div>
-		<div>Github:</div>
+		<div>Github:</div>{{user.github}}
 		<div> <input ng-model="github" type="text" ng-show="editProfile"> </div>
 	</div>
 	<div>
-		<div>Personal Website:</div>
+		<div>Personal Website:</div>{{user.website}}
 		<div> <input ng-model="personalWebsite" type="text" ng-show="editProfile"> </div>
 	</div>
 	<div><button ng-show="editProfile" ng-click= "saveChanges()">Save Changes</button></div>

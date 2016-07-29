@@ -23,7 +23,7 @@ app.factory('messages', function($q, $http, firebaseUrl){
 	let filterText = function(text){
 		textArray = []
 		let array = text.split(" ");
-		let regex = /\b(?:youtube|.gif)\b/gi;
+		let regex = /\b(?:youtube|.gif|.jpg|.png|.jpeg)\b/gi;
 		for(let i=0;i<array.length; i++){
 			let current = array[i]
 			if(current.match(regex)){
@@ -72,7 +72,7 @@ app.factory('messages', function($q, $http, firebaseUrl){
 		let match = false;
 		let array = str.split(" ");
 		let url = null;
-		let regex = /\b(?:.gif|.jpg)\b/gi;
+		let regex = /\b(?:.gif|.jpg|.png|.jpeg)\b/gi;
 		for(let i=0;i<array.length; i++){
 			let current = array[i]
 			if(current.match(regex)){

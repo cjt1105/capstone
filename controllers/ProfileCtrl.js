@@ -1,4 +1,4 @@
-app.controller("ProfileCtrl", function($scope, profile, localStorageService){
+app.controller("ProfileCtrl", function($scope, $location, profile, localStorageService, $route){
 	/// variables and states
 	let currentUser = localStorageService.get("currentUser");
 	$scope.editProfile = false;
@@ -7,45 +7,50 @@ app.controller("ProfileCtrl", function($scope, profile, localStorageService){
 
 	profile.getUser(userKey)
 	.then(function(user){
-		userKey = [];
-		console.log(userKey)
 		$scope.user = user;
 		if (currentUser.uid === user.uid){
 			$scope.canEdit = true;
-		}
+		};
 		if($scope.user.aboutMe != undefined){
 			$scope.hasAboutMe = true;
-		}
-	})
-	.then(function(){
-		console.log($scope.hasAboutMe)
+		};
+		if($scope.user.github != undefined){
+			$scope.hasGithub = true;
+		};
+		if($scope.user.website != undefined){
+			$scope.hasWebsite = true;
+		};
 	})
 
 	$scope.saveChanges = function(){
 		let aboutMe = $scope.aboutMe;
-		$scope.aboutMe = "";
 		let github = $scope.github;
-		$scope.github = "";
 		let website = $scope.personalWebsite;
-		$scope.personalWebsite = "";
-		let changes = {
-			aboutMe: aboutMe,
-			github: github,
-			website: website
+		let changes = {};
+		if(aboutMe != undefined&&aboutMe != ""){
+			console.log("whatitis",aboutMe)
+			changes.aboutMe = aboutMe;
 		}
-		profile.editUser(userKey[0], changes)
-		$scope.editProfile = false;
+		if(github != undefined&&aboutMe != ""){
+			changes.github = github;
+		}
+		if(website != undefined&&aboutMe != ""){
+			changes.website = website;
+		}
+		if(aboutMe != undefined|github != undefined|website != undefined){
+			profile.editUser(userKey[0], changes)
+			.then(function(user){
+				userKey = [];
+				$scope.aboutMe = "";
+				$scope.github = "";
+				$scope.personalWebsite = "";
+				profile.getUser(userKey)
+				.then(function(user){
+					$scope.editProfile = false;
+					$route.reload();
+				})
+			})
+		}
 	}
-
-
-	// user()
-	// .then(function(user){
-	// 	// $scope.profilePicture = user.profilePicture;
-	// 	// $scope.userName = user.name;
-	// 	// $scope
-	// })
-
-
-
 
 })

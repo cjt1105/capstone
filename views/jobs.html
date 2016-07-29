@@ -1,4 +1,9 @@
+<div ng-repeat="job in jobs">
+{{job.title}}....{{job.company}}....{{job.stack}}
+</div>
+
 <h1>Post Jobs for soon to be NSS grads</h1>
-<input type="text" ng-model="jobTitle">
-<input type="text" ng-model="companyName">
-<input type="text" ng-model="stack">
+Job Title: <input type="text" ng-model="jobTitle">
+Company Name: <input type="text" ng-model="companyName">
+Tech Stack: <input type="text" ng-model="stack">
+<button ng-click="postJob()" >submit</button>

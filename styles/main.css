@@ -29,3 +29,10 @@
 	background: red;
 	min-height: 400px;
 }
+.home-container {
+    background: url('https://mahbubzaman.files.wordpress.com/2013/05/screen-shot-2013-05-15-at-8-31-54-pm.png');
+    height: 450px;
+}
+.navbar {
+    height: 100px;
+}

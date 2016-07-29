@@ -1,4 +1,5 @@
 app.controller("MessagesCtrl", function($scope, localStorageService, messages){
+
 	let currentUser = localStorageService.get("currentUser");
 	$scope.userMessage = null;
 	$scope.messageList = [];
@@ -18,8 +19,8 @@ app.controller("MessagesCtrl", function($scope, localStorageService, messages){
   var el = $("#userInput").emojioneArea();
 
   $scope.getIframeSrc = function (videoId) {
-  return 'https://www.youtube.com/embed/' + videoId;
-}
+  	return 'https://www.youtube.com/embed/' + videoId;
+	};
 
   el[0].emojioneArea.on("keyup", function(editor, event) {
 		if(event.which === 13){
@@ -38,18 +39,17 @@ app.controller("MessagesCtrl", function($scope, localStorageService, messages){
 				uid: uid,
 				isMedia: false,
 				isYoutube: false
-			}
+			};
 			editor[0].innerText = "";
 			if (youtubeKey!= null){
 				newMessage.youtubeKey = youtubeKey;
 				newMessage.isYoutube = true;
 
-			}
+			};
 			if(mediaSource!= null){
 				newMessage.mediaSource = mediaSource;
 				newMessage.isMedia = true;
-			}
-			console.log(newMessage);
+			};
 			messages.postMessage(newMessage)
 			.then(function(){
 				$scope.messageList = []
