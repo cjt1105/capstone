@@ -26,7 +26,7 @@ app.config(function($routeProvider) {
         templateUrl: "views/profile.html",
         controller: 'ProfileCtrl'
     }).
-    when('/profile/:id', {
+    when('/conversations/:id', {
         templateUrl: "views/conversations.html",
         controller: 'ConversationCtrl'
     }).
