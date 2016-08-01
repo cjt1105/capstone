@@ -1,10 +1,10 @@
-app.controller("MessagesCtrl", function($scope, localStorageService, messages){
-
+app.controller("MessagesCtrl", function($scope, localStorageService, messages, $routeParams){
+	let key = $routeParams.id;
 	let currentUser = localStorageService.get("currentUser");
 	$scope.userMessage = null;
 	$scope.messageList = [];
 
-	messages.getMessageList()
+	messages.getMessageList(key)
 	.then(function(messages){
 		for(message in messages){
 			let current = messages[message];
@@ -23,6 +23,7 @@ app.controller("MessagesCtrl", function($scope, localStorageService, messages){
 	};
 
   el[0].emojioneArea.on("keyup", function(editor, event) {
+
 		if(event.which === 13){
 			let name = currentUser.displayName;
 			let text = el[0].emojioneArea.getText();
@@ -50,7 +51,7 @@ app.controller("MessagesCtrl", function($scope, localStorageService, messages){
 				newMessage.mediaSource = mediaSource;
 				newMessage.isMedia = true;
 			};
-			messages.postMessage(newMessage)
+			messages.postMessage(newMessage, key)
 			.then(function(){
 				$scope.messageList = []
 				messages.getMessageList().then(function(messages){

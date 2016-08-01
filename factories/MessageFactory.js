@@ -1,9 +1,9 @@
 app.factory('messages', function($q, $http, firebaseUrl){
 
-	let getMessageList = function(){
+	let getMessageList = function(key){
 		let messages = [];
     return $q(function(resolve, reject) {
-      $http.get(`${firebaseUrl}/message.json`)
+      $http.get(`${firebaseUrl}/channels/${key}/messages.json`)
       .success(function(messageArray) {
         if (messageArray) {
         let messageList = messageArray;
@@ -35,9 +35,9 @@ app.factory('messages', function($q, $http, firebaseUrl){
 		return textArray
 	}
 
-	let postMessage = function(userMessage){
+	let postMessage = function(userMessage, key){
 		return $q(function(resolve, reject) {
-      $http.post(`${firebaseUrl}/message.json`, userMessage)
+      $http.post(`${firebaseUrl}/channels/${key}/messages.json`, userMessage)
       .success(function(messages) {
         resolve(messages)
       })

@@ -36,3 +36,6 @@
 .navbar {
     height: 100px;
 }
+#channels {
+    background-color: purple;
+}

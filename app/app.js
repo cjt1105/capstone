@@ -10,7 +10,7 @@ app.config(function($sceDelegateProvider){
 
 app.config(function($routeProvider) {
     $routeProvider.
-    when('/messages', {
+    when('/messages/:name/:id', {
         templateUrl: "views/messages.html",
         controller: 'MessagesCtrl'
     }).

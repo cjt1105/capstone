@@ -1,0 +1,7 @@
+<div ng-controller="ChannelCtrl" id="channles">
+<a ng-href="#/messages/{{channel.name}}/{{channel.channelId}}" ng-repeat="channel in channels" ng-click="loadChannel(channel.channelId)">
+{{channel.name}}
+</a>
+<input type="text" ng-model="channelName">
+<button ng-click="addChannel()" >add channel</button>
+</div>
