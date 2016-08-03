@@ -4,17 +4,25 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Cohort Whatever</title>
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="styles/main.css">
 	<script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
 	<link rel="stylesheet" href="lib/bower_components/emojionearea/dist/emojionearea.min.css">
+	<link rel="stylesheet" href="lib/node_modules/angular-modal/modal.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 	<script src="lib/bower_components/emojionearea/dist/emojionearea.min.js"></script>
 </head>
 <body ng-app="CohortWhatever">
-
-	<div ng-include="'/views/navbar.html'"></div>
-	<div ng-include="'/views/channels.html'"></div>
-	<div id="container">
-		<div ng-view></div>
+	<div class="row">
+		<div id="sidebar" ng-controller="SidebarCtrl" ng-hide="hideSidebar" class="col s4">
+			<div ng-include="'/views/channels.html'"></div>
+			<div ng-include="'/views/conversations.html'" scope="" onload=""></div>
+		</div>
+		<div class="col s9">
+			<div ng-include="'/views/navbar.html'"></div>
+			<div ng-view></div>
+		</div>
 	</div>
 
 
@@ -32,6 +40,7 @@
 	<script src="factories/MessageFactory.js"></script>
 	<script src="controllers/JobCtrl.js"></script>
 	<script src="lib/bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+	<script src="lib/node_modules/angular-modal/modal.min.js"></script>
 	<script src="controllers/ProfileCtrl.js"></script>
 	<script src="factories/ProfileFactory.js"></script>
 	<script src="factories/JobFactory.js"></script>
@@ -39,5 +48,7 @@
 	<script src="controllers/ConversationCtrl.js"></script>
 	<script src="controllers/ChannelCtrl.js"></script>
 	<script src="factories/ChannelFactory.js"></script>
+	<script src="controllers/SidebarCtrl.js"></script>
+
 </body>
 </html>

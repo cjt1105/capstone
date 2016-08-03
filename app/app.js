@@ -1,4 +1,4 @@
-var app = angular.module('CohortWhatever', ['ngRoute', 'LocalStorageModule']);
+var app = angular.module('CohortWhatever', ['ngRoute', 'LocalStorageModule', 'btford.modal']);
 
 app.constant('firebaseUrl', "https://cap-test-77b43.firebaseio.com");
 
@@ -6,6 +6,22 @@ app.config(function($sceDelegateProvider){
 	$sceDelegateProvider.resourceUrlWhitelist([
   'self',
   'https://www.youtube.com/**']);
+})
+
+app.factory('myModal', function (btfModal) {
+  return btfModal({
+    controller: 'MyModalCtrl',
+    controllerAs: 'modal',
+    templateUrl: 'views/channelModal.html'
+  });
+})
+
+app.controller('MyModalCtrl', function (myModal) {
+  this.closeMe = myModal.deactivate;
+})
+
+app.controller('MyCtrl', function (myModal) {
+  this.showModal = myModal.activate;
 })
 
 app.config(function($routeProvider) {
@@ -31,18 +47,4 @@ app.config(function($routeProvider) {
         controller: 'ConversationCtrl'
     }).
     otherwise('/home');
-});
-
-app.directive('ngEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if(event.which === 13) {
-                scope.$apply(function (){
-                    scope.$eval(attrs.ngEnter);
-                });
-
-                event.preventDefault();
-            }
-        });
-    };
 });

@@ -1,17 +1,18 @@
-<button ng-click="searchUsers = true" >add user</button>
-<div ng-show="searchUsers">
-<div ng-repeat="user in users">
+<!-- <button ng-click="searchUsers = true" >add user</button> -->
+<!-- <div ng-show="searchUsers">
+<input type="text" ng-model="searchText">
+<div ng-repeat="user in users| filter:searchText">
 	<span targetUid="{{user.uid}}" ng-click="handleNewConvo(user.uid)">{{user.name}}</span>
 </div>
 </div>
 
-<div id="messageContainer">
+<div>
 	<div ng-repeat="message in messageList">
 		<img ng-src="{{message.userPicture}}">
 		<a ng-attr-data="{{message.uid}}" ng-href="#/profile/{{message.uid}}" >{{message.userName}}</a>
 			<img ng-show="{{message.isMedia}}" ng-src="{{message.mediaSource}}">
-			<iframe ng-show="{{message.isYoutube}}"width="560" height="315" ng-src="{{getIframeSrc(message.youtubeKey)}}" frameborder="0" allowfullscreen></iframe>
+			<iframe ng-show="{{message.isYoutube}}"width="560" height="315" ng-src="{{getIframeSrc(message.youtubeKey)}}" frameborder="0" allowfullscreen>
 			{{message.text}}
 	</div>
-</div>
-<textarea  ng-model="userMessage" ng-enter="sendMessage()" id="userInput"></textarea>
+</div> -->
+<!-- <textarea  ng-model="userMessage" ng-enter="sendMessage()" id="userInput"></textarea> -->

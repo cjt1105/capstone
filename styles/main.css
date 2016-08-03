@@ -19,23 +19,98 @@
     50% { opacity:0; }
     100% { opacity:1; }
 }
+body {
+    font-family: "Lato", sans-serif;
+}
 .type {
 	display: inline;
 }
-#inputContainer {
-	float: bottom;
-}
+
 #messageContainer {
-	background: red;
-	min-height: 400px;
+	background: #FFFFFF;
+	min-height: 500px;
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+
 }
 .home-container {
-    background: url('https://mahbubzaman.files.wordpress.com/2013/05/screen-shot-2013-05-15-at-8-31-54-pm.png');
     height: 450px;
 }
-.navbar {
-    height: 100px;
+// .navbar {
+//     height: 40px;
+//     margin-left: 20.2%;
+//     display: inline-block;
+//     float: right;
+//     margin-bottom: none;
+//     width: 62.8%;
+
+// }
+#sidebar {
+    display: inline-block;
+    width: 17%;
+    min-height: 400px;
+    margin-top: none;
+}
+.emojiContainer {
+    width: 95%;
+    // display: inline-block;
+}
+#the-container {
+    float: right;
+    width: 80%;
+}
+.channelLinks {
+    display: block;
 }
 #channels {
-    background-color: purple;
+    background-color: #4D394B;
+    width: 100%;
+    min-height: 650px;
+    margin-left: none;
+}
+.messagePicture {
+    width: 50px;
+    height: 50px;
+    border-radius: 8%;
+}
+.messageName {
+    color: black;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.timestamp {
+    color: #9F9FA7;
+    margin-left: 10px;
+    font-weight: lighter;
+    font-style:italic;
+}
+#filler {
+    width: 100px;
+    height: 40px;
+    background-color: #4D394B;
+    display: inline-block;
+}
+#container {
+    width: 50%
+}
+#add-channel {
+    height: 25px;
+    width:  25px;
+    font-size: 5px;
+    text-align: center;
+}
+#channelModal {
+    width:100%;
+    height: 100%;
+    background-color: white;
+}
+.closeButton {
+    width: 45px;
+    height: 30px;
+    float: right;
+    margin-right: 5%;
+    margin-top: 10%;
+    color: red
 }

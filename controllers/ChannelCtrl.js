@@ -1,9 +1,23 @@
-app.controller('ChannelCtrl', function($scope, channels, $routeParams){
+app.controller('ChannelCtrl', function($scope, channels, $routeParams, myModal){
+
+	$scope.hideSidebar = false;
+
+	$scope.hey = function(){
+		console.log($scope.channelName)
+	}
 
 	channels.getChannels()
 	.then(function(channels){
-		$scope.channels = channels
+		$scope.channels = channels;
+		let array = Object.keys(channels);
+		$scope.channelNum = array.length;
+		console.log(channels)
 	})
+	.then(function(){
+		console.log($scope.channelNum)
+	})
+
+
 
 	$scope.addChannel = function(){
 		let data = {name: $scope.channelName};

@@ -1,7 +1,10 @@
-<div ng-controller="ChannelCtrl" id="channles">
-<a ng-href="#/messages/{{channel.name}}/{{channel.channelId}}" ng-repeat="channel in channels" ng-click="loadChannel(channel.channelId)">
+<div ng-controller="ChannelCtrl" id="channels" ng-hide="hideSidebar">
+<p>Channels{{channelNum}}</p>
+<div ng-controller="MyCtrl as ctrl">
+	<a class="material-icons" ng-click="ctrl.showModal()"><img src="http://image.flaticon.com/icons/png/128/54/54443.png" alt="" id="add-channel"></a>
+</div>
+
+<a class="channelLinks" ng-href="#/messages/{{channel.name}}/{{channel.channelId}}" ng-repeat="channel in channels" ng-click="loadChannel(channel.channelId)">
 {{channel.name}}
 </a>
-<input type="text" ng-model="channelName">
-<button ng-click="addChannel()" >add channel</button>
 </div>

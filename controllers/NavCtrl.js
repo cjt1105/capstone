@@ -1,4 +1,4 @@
-app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService){
+app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService, $location){
 
 	$scope.userExists = false;
 
@@ -37,6 +37,8 @@ app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService)
 						console.log("mycurrent", currentUser)
 						userFactory.createUser(newUser);
 					}
+					// $location.url('#/messages/general/id:-KO5zsxnDELiS6pHFHps')
+					$location.path('jobs')
 				})
 
 		});
