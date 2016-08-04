@@ -1,6 +1,6 @@
-app.controller('ConversationCtrl', function($scope, userFactory, localStorageService, conversations, messages){
+app.controller('ConversationCtrl', function($scope, $routeParams, userFactory, localStorageService, conversations, messages){
 
-	let key;
+	let key = $routeParams.id
 	$scope.newConvo = true;
 	$scope.messageList = [];
 
@@ -8,7 +8,15 @@ app.controller('ConversationCtrl', function($scope, userFactory, localStorageSer
 	userFactory.getUserList()
 	.then(function(users){
 		$scope.users = users;
+	});
+
+	conversations.getMessages(key)
+	.then(function(messages){
+		Object.keys(messages).forEach(function(key){
+			$scope.messageList.push(messages[key])
+		})
 	})
+
 
 	$scope.handleNewConvo = function(uid){
 		$scope.messageList = [];
@@ -37,7 +45,7 @@ app.controller('ConversationCtrl', function($scope, userFactory, localStorageSer
 		})
 		.then(function(){
 			//get current convo messages
-			conversations.getConvo(key)
+			conversations.getMessages(key)
 			.then(function(messages){
 				for(message in messages){
 					let current = messages[message];
@@ -51,7 +59,7 @@ app.controller('ConversationCtrl', function($scope, userFactory, localStorageSer
     $("#userInput").emojioneArea();
   });
 
-  var el = $("#userInput").emojioneArea();
+  var el = $("#userInput2").emojioneArea();
 
   $scope.getIframeSrc = function (videoId) {
   	return 'https://www.youtube.com/embed/' + videoId;
@@ -89,7 +97,7 @@ app.controller('ConversationCtrl', function($scope, userFactory, localStorageSer
 			conversations.postMessage(newMessage, key)
 			.then(function(){
 				$scope.messageList = []
-				conversations.getConvo(key)
+				conversations.getMessages(key)
 				.then(function(messages){
 					for(message in messages){
 					let current = messages[message];

@@ -105,12 +105,33 @@ body {
     width:100%;
     height: 100%;
     background-color: white;
+    text-align: center;
 }
 .closeButton {
     width: 45px;
     height: 30px;
     float: right;
-    margin-right: 5%;
+    margin-right: 3.5%;
     margin-top: 10%;
     color: red
+}
+.channelHeader {
+    margin-top: 15%;
+}
+#channelInput {
+    width: 100%;
+    border: 1px solid #C5C5C5;
+}
+#channelNameHeader{
+    width: 50%;
+    margin-top: 5%;
+    text-align: left;
+}
+#mainChannelHeader{
+    text-align: center;
+}
+#channelContainer {
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 10%;
 }

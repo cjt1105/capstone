@@ -37,8 +37,6 @@ app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService,
 						console.log("mycurrent", currentUser)
 						userFactory.createUser(newUser);
 					}
-					// $location.url('#/messages/general/id:-KO5zsxnDELiS6pHFHps')
-					$location.path('jobs')
 				})
 
 		});
@@ -59,13 +57,15 @@ app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService,
 				})
 				localStorageService.set("currentUser", user);
 				$scope.currentUser = localStorageService.get("currentUser");
+				$location.path('messages/general/-KO5zsxnDELiS6pHFHps');
 
 			}
 			else {
 				$scope.$apply(function(){
 					$scope.loggedin = false;
 				})
-				localStorageService.set("currentUser", "null")
+				console.log("WTZF")
+				// localStorageService.set("currentUser", "null")
 			}
 		})
 	}

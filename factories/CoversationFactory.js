@@ -19,11 +19,14 @@ app.factory('conversations', function($q,$http,firebaseUrl){
 	}
 
 	getConvoList = function(){
+    let conversationsList = [];
 		return $q(function(resolve, reject) {
       $http.get(`${firebaseUrl}/conversations.json`)
       .success(function(conversations) {
-      	conversations = Object.keys(conversations)
-        resolve(conversations)
+      	Object.keys(conversations).forEach(function(key) {
+          conversationsList.push(conversations[key]);
+        });
+        resolve(conversationsList)
       })
       .error(function(error) {
         reject(error);
@@ -31,7 +34,7 @@ app.factory('conversations', function($q,$http,firebaseUrl){
     });
 	}
 
-	getConvo = function(key){
+	getMessages = function(key){
 		return $q(function(resolve, reject) {
       $http.get(`${firebaseUrl}/conversations/${key}/messages.json`)
       .success(function(conversation) {
@@ -54,5 +57,5 @@ app.factory('conversations', function($q,$http,firebaseUrl){
       })
     });
 	}
-	return {createConvo, createKey, getConvo, getConvoList, postMessage}
+	return {createConvo, createKey, getMessages, getConvoList, postMessage}
 })

@@ -35,7 +35,10 @@ app.factory('userFactory', function($q, $http, firebaseUrl){
   };
 
 	let getCurrentUser = function(){
-		let user = firebase.auth().currentUser;
+		return $q(function(resolve,reject){
+      let user = firebase.auth().currentUser
+        resolve(user);
+    })
 	};
 
 	return { getCurrentUser, getUserList, createUser}

@@ -14,16 +14,12 @@
 	<script src="lib/bower_components/emojionearea/dist/emojionearea.min.js"></script>
 </head>
 <body ng-app="CohortWhatever">
-	<div class="row">
-		<div id="sidebar" ng-controller="SidebarCtrl" ng-hide="hideSidebar" class="col s4">
-			<div ng-include="'/views/channels.html'"></div>
-			<div ng-include="'/views/conversations.html'" scope="" onload=""></div>
-		</div>
-		<div class="col s9">
-			<div ng-include="'/views/navbar.html'"></div>
+		<div >
+			<div class="row">
+				<div ng-include="'/views/navbar.html'"></div>
+			</div>
 			<div ng-view></div>
 		</div>
-	</div>
 
 
 	<script src="lib/bower_components/jquery-ui/jquery-ui.min.js"></script>
