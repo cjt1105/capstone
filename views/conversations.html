@@ -1,12 +1,8 @@
-
-<!-- <div ng-show="searchUsers">
-<input type="text" ng-model="searchText">
-<div ng-repeat="user in users| filter:searchText">
-	<span targetUid="{{user.uid}}" ng-click="handleNewConvo(user.uid)">{{user.name}}</span>
-</div>
-</div> -->
-	<div>
-	<div id="messageContainer" >
+<div class="row">
+<div id="sidebar" ng-controller="SidebarCtrl" ng-hide="hideSidebar" class="col s4">
+			<div ng-include="'/views/channels.html'"></div>
+		</div>
+	<div id="messageContainer" class="col s4 push-s5" >
 		<div ng-repeat="message in messageList">
 			<img class="messagePicture" ng-src="{{message.userPicture}}">
 			<a class="messageName" ng-attr-data="{{message.uid}}" ng-href="#/profile/{{message.uid}}" >{{message.userName}}</a>
@@ -17,8 +13,9 @@
 
 		</div>
 	</div>
-	<div>
-	<textarea  ng-model="userMessage" ng-enter="sendMessage()" id="userInput2"></textarea>
+	<div class="emojiContainer col s4 push-s5">
+		<input  ng-model="userMessage" ng-enter="sendMessage()" id="userInput">
+	</div>
 </div>
 
 

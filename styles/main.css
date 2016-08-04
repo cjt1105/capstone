@@ -107,6 +107,12 @@ body {
     background-color: white;
     text-align: center;
 }
+#covoModal {
+    width:100%;
+    height: 100%;
+    background-color: white;
+    text-align: center;
+}
 .closeButton {
     width: 45px;
     height: 30px;

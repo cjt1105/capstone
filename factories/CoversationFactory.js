@@ -8,7 +8,7 @@ app.factory('conversations', function($q,$http,firebaseUrl){
 	}
 	createConvo = function(key, data){
 		return $q(function(resolve, reject) {
-      $http.post(`${firebaseUrl}/conversations/${key}.json`, data)
+      $http.put(`${firebaseUrl}/conversations/${key}/info.json`, data)
       .success(function(conversation) {
         resolve(conversation)
       })

@@ -1,0 +1,10 @@
+<div id="covoModal" class="btf-modal">
+<div ng-controller="ConversationCtrl">
+	<input type="text" ng-model="searchText">
+	<div ng-repeat="user in users| filter:searchText">
+		<div targetUid="{{user.uid}}" ng-click="handleNewConvo(user.uid,user.name)"><img class="messagePicture" ng-src="{{user.profilePicture}}" alt=""><span>{{user.name}}</span></div>
+	</div>
+</div>
+	<a class="closeButton" ng-click="modal.closeConvoModal()"><img class="closeButton" src="http://www.armstrong.com/commceilingsna/responsive/images/close-x.png" alt=""></a>
+	HEYYYYEYEYEY
+</div>

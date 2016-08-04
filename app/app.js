@@ -8,7 +8,7 @@ app.config(function($sceDelegateProvider){
   'https://www.youtube.com/**']);
 })
 
-app.factory('myModal', function (btfModal) {
+app.factory('channelModal', function (btfModal) {
   return btfModal({
     controller: 'MyModalCtrl',
     controllerAs: 'modal',
@@ -16,12 +16,23 @@ app.factory('myModal', function (btfModal) {
   });
 })
 
-app.controller('MyModalCtrl', function (myModal) {
-  this.closeMe = myModal.deactivate;
+app.factory('convoModal', function (btfModal) {
+  return btfModal({
+    controller: 'MyModalCtrl',
+    controllerAs: 'modal',
+    templateUrl: 'views/convoModal.html'
+  });
 })
 
-app.controller('MyCtrl', function (myModal) {
-  this.showModal = myModal.activate;
+app.controller('MyModalCtrl', function (channelModal, convoModal) {
+  this.closeConvoModal = convoModal.deactivate;
+  this.closeChannelModal = channelModal.deactivate;
+
+})
+
+app.controller('MyCtrl', function (channelModal, convoModal) {
+  this.showConvoModal = convoModal.activate;
+  this.showChannelModal = channelModal.activate;
 })
 
 app.config(function($routeProvider) {

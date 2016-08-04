@@ -1,4 +1,4 @@
-app.controller('ConversationCtrl', function($scope, $routeParams, userFactory, localStorageService, conversations, messages){
+app.controller('ConversationCtrl', function($scope, $timeout, $location, $route, $routeParams, userFactory, localStorageService, conversations, messages){
 
 	let key = $routeParams.id
 	$scope.newConvo = true;
@@ -12,26 +12,27 @@ app.controller('ConversationCtrl', function($scope, $routeParams, userFactory, l
 
 	conversations.getMessages(key)
 	.then(function(messages){
-		Object.keys(messages).forEach(function(key){
-			$scope.messageList.push(messages[key])
-		})
+		if(messages != undefined | null){
+			Object.keys(messages).forEach(function(key){
+				$scope.messageList.push(messages[key])
+			})
+		}
 	})
 
-
-	$scope.handleNewConvo = function(uid){
+	$scope.handleNewConvo = function(uid, name){
 		$scope.messageList = [];
 		$scope.newConvo = true;
 		key = null;
 		let toUid = uid;
 		let fromUid = currentUser.uid;
 		key = conversations.createKey(toUid,fromUid);
-		let data = {toUid: toUid, fromUid: fromUid};
+		let data = {to: name, from: currentUser.displayName, id:key};
 		/// get convos and check if convo already exists
 		conversations.getConvoList()
 		.then(function(convos){
 			for(let i = 0; i < convos.length; i ++){
-				let current = convos[i];
-				if(current === key){
+				let currentId = convos[i].info.id;
+				if(currentId === key){
 					$scope.newConvo = false;
 				}
 			}
@@ -44,6 +45,7 @@ app.controller('ConversationCtrl', function($scope, $routeParams, userFactory, l
 			}
 		})
 		.then(function(){
+			$location.path(`/conversations/${key}`);
 			//get current convo messages
 			conversations.getMessages(key)
 			.then(function(messages){
@@ -51,7 +53,10 @@ app.controller('ConversationCtrl', function($scope, $routeParams, userFactory, l
 					let current = messages[message];
 					$scope.messageList.push(current)
 				}
-			})
+				$timeout(function(){
+					angular.element('.closeButton').trigger('click');
+				})
+			},0,false)
 		})
 	}
 
@@ -59,7 +64,7 @@ app.controller('ConversationCtrl', function($scope, $routeParams, userFactory, l
     $("#userInput").emojioneArea();
   });
 
-  var el = $("#userInput2").emojioneArea();
+  var el = $("#userInput").emojioneArea();
 
   $scope.getIframeSrc = function (videoId) {
   	return 'https://www.youtube.com/embed/' + videoId;

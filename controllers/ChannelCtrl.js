@@ -1,4 +1,4 @@
-app.controller('ChannelCtrl', function($scope, channels, $routeParams, myModal){
+app.controller('ChannelCtrl', function($scope, channels, $routeParams){
 
 	$scope.hideSidebar = false;
 
