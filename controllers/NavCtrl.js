@@ -1,4 +1,4 @@
-app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService){
+app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService, $location){
 
 	$scope.userExists = false;
 
@@ -57,13 +57,16 @@ app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService)
 				})
 				localStorageService.set("currentUser", user);
 				$scope.currentUser = localStorageService.get("currentUser");
+				$location.path('messages/general/-KO5zsxnDELiS6pHFHps');
 
 			}
 			else {
 				$scope.$apply(function(){
 					$scope.loggedin = false;
 				})
-				localStorageService.set("currentUser", "null")
+				console.log("WTZF")
+				localStorageService.set("currentUser", "null");
+				$location.path('home');
 			}
 		})
 	}

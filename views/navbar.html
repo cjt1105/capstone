@@ -1,22 +1,24 @@
-<div class="navbar" ng-controller="NavCtrl">
-	<header id="header" ng-controller="NavCtrl">
-		<span>
-			<a href="#">Home</a>
-		</span>
-		<span>
-			<a href="" ng-click="login()" ng-hide="loggedin">Login</a>
-		</span>
-		<span>
-			<a href="" ng-click="logout()" ng-show="loggedin">Logout</a>
-		</span>
-		<span>
-			<a href="#/messages">messages</a>
-		</span>
-		<span>
-			<a href="#/jobs">Jobs</a>
-		</span>
-		<span>
-			<a ng-href="#/profile/{{currentUser.uid}}">Profile</a>
-		</span>
-	</header>
+<div class="row" style="margin-bottom: 0px;">
+	<div ng-show="loggedin" id="filler" class="col s2"></div>
+	<div id="navbar" class="col s10" ng-controller="NavCtrl">
+			<span ng-show="loggedin">
+				<a href="#/messages/general/-KO5zsxnDELiS6pHFHps">Home</a>
+				<a ng-href="#/profile/{{currentUser.uid}}">Profile</a>
+			</span>
+			<span>
+				<a href="" ng-click="login()" ng-hide="loggedin">Login</a>
+			</span>
+			<span>
+				<a href="" ng-click="logout()" ng-show="loggedin">Logout</a>
+			</span>
+			<!-- <span>
+				<a href="#/jobs">Jobs</a>
+			</span> -->
+			<span ng-show="loggedin">
+
+			</span>
+			<!-- <span>
+				<a ng-href="#/conversations/{{currentUser.uid}}">conversations</a>
+			</span> -->
+	</div>
 </div>

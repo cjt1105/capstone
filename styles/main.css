@@ -19,20 +19,135 @@
     50% { opacity:0; }
     100% { opacity:1; }
 }
+body {
+    font-family: "Lato", sans-serif;
+    overflow: hidden;
+}
 .type {
 	display: inline;
 }
-#inputContainer {
-	float: bottom;
-}
+
 #messageContainer {
-	background: red;
-	min-height: 400px;
+	background: #FFFFFF;
+	min-height: 90vh;
+    display: inline-block;
+
 }
+#messageWindow {
+    min-height: 85vh;
+    max-height: 85vh;
+    overflow: scroll;
+}
+
 .home-container {
-    background: url('https://mahbubzaman.files.wordpress.com/2013/05/screen-shot-2013-05-15-at-8-31-54-pm.png');
     height: 450px;
+    text-align: center;
+    margin-top: 15%;
 }
-.navbar {
-    height: 100px;
+#navbar {
+    margin-bottom: 0;
+
+}
+#sidebar {
+    display: inline-block;
+    min-height: 95vh;
+    margin-top: 0;
+    background-color: #4D394B;
+    text-align: center;
+}
+.emojiContainer {
+    width: 95%;
+    // display: inline-block;
+}
+#emojiContainer {
+    margin-top: 20px;
+}
+#the-container {
+    float: right;
+    width: 80%;
+}
+.channelLinks {
+    display: block;
+}
+.messagePicture {
+    width: 6.5vh;
+    height: 6.5vh;
+    border-radius: 8%;
+    margin-left: 10px;
+    display: inline-block;
+}
+#messagePicture {
+    display: inline-block;
+}
+#messageBody {
+    display: inline-block;
+    padding-left: 10px;
+    vertical-align: center;
+}
+.messageName {
+    color: black;
+    font-weight: bold;
+    font-size: 1.1em;
+    display: inline-block;
+}
+.timestamp {
+    color: #9F9FA7;
+    margin-left: 10px;
+    font-weight: lighter;
+    font-style:italic;
+    display: inline-block;
+}
+#filler {
+   background-color: #4D394B;
+   min-height: 5vh;
+   margin-top: 0;
+}
+#container {
+    width: 50%
+}
+#add-channel {
+    height: 25px;
+    width:  25px;
+    font-size: 5px;
+    text-align: center;
+}
+#channelModal {
+    width:100%;
+    height: 100%;
+    background-color: white;
+    text-align: center;
+}
+#covoModal {
+    width:100%;
+    height: 100%;
+    background-color: white;
+    text-align: center;
+}
+.closeButton {
+    width: 45px;
+    height: 30px;
+    float: right;
+    margin-right: 3.5%;
+    margin-top: 10%;
+    color: red
+}
+.channelHeader {
+    margin-top: 15%;
+}
+#channelInput {
+    width: 100%;
+    border: 1px solid #C5C5C5;
+}
+#channelNameHeader{
+    width: 50%;
+    margin-top: 5%;
+    text-align: left;
+}
+#mainChannelHeader{
+    text-align: center;
+}
+#channelContainer {
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 10%;
 }

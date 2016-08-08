@@ -3,7 +3,6 @@ app.factory('userFactory', function($q, $http, firebaseUrl){
 
 	let getUserList = function(){
 		let users = [];
-		let currentUid = firebase.auth().currentUser.uid;
     return $q(function(resolve, reject) {
       $http.get(`${firebaseUrl}/users.json`)
       .success(function(usersArray) {
@@ -36,7 +35,10 @@ app.factory('userFactory', function($q, $http, firebaseUrl){
   };
 
 	let getCurrentUser = function(){
-		let user = firebase.auth().currentUser;
+		return $q(function(resolve,reject){
+      let user = firebase.auth().currentUser
+        resolve(user);
+    })
 	};
 
 	return { getCurrentUser, getUserList, createUser}

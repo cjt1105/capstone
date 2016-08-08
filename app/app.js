@@ -1,4 +1,4 @@
-var app = angular.module('CohortWhatever', ['ngRoute', 'LocalStorageModule']);
+var app = angular.module('CohortWhatever', ['ngRoute', 'LocalStorageModule', 'btford.modal']);
 
 app.constant('firebaseUrl', "https://cap-test-77b43.firebaseio.com");
 
@@ -8,9 +8,36 @@ app.config(function($sceDelegateProvider){
   'https://www.youtube.com/**']);
 })
 
+app.factory('channelModal', function (btfModal) {
+  return btfModal({
+    controller: 'MyModalCtrl',
+    controllerAs: 'modal',
+    templateUrl: 'views/channelModal.html'
+  });
+})
+
+app.factory('convoModal', function (btfModal) {
+  return btfModal({
+    controller: 'MyModalCtrl',
+    controllerAs: 'modal',
+    templateUrl: 'views/convoModal.html'
+  });
+})
+
+app.controller('MyModalCtrl', function (channelModal, convoModal) {
+  this.closeConvoModal = convoModal.deactivate;
+  this.closeChannelModal = channelModal.deactivate;
+
+})
+
+app.controller('MyCtrl', function (channelModal, convoModal) {
+  this.showConvoModal = convoModal.activate;
+  this.showChannelModal = channelModal.activate;
+})
+
 app.config(function($routeProvider) {
     $routeProvider.
-    when('/messages', {
+    when('/messages/:name/:id', {
         templateUrl: "views/messages.html",
         controller: 'MessagesCtrl'
     }).
@@ -26,19 +53,9 @@ app.config(function($routeProvider) {
         templateUrl: "views/profile.html",
         controller: 'ProfileCtrl'
     }).
+    when('/conversations/:id', {
+        templateUrl: "views/messages.html",
+        controller: 'ConversationCtrl'
+    }).
     otherwise('/home');
-});
-
-app.directive('ngEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if(event.which === 13) {
-                scope.$apply(function (){
-                    scope.$eval(attrs.ngEnter);
-                });
-
-                event.preventDefault();
-            }
-        });
-    };
 });

@@ -3,7 +3,7 @@ app.controller("ProfileCtrl", function($scope, $location, profile, localStorageS
 	let currentUser = localStorageService.get("currentUser");
 	$scope.editProfile = false;
 	$scope.canEdit = false;
-	let userKey = []
+	let userKey = [];
 
 	profile.getUser(userKey)
 	.then(function(user){

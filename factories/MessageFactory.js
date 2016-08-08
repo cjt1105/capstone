@@ -1,9 +1,9 @@
 app.factory('messages', function($q, $http, firebaseUrl){
 
-	let getMessageList = function(){
+	let getMessageList = function(key){
 		let messages = [];
     return $q(function(resolve, reject) {
-      $http.get(`${firebaseUrl}/message.json`)
+      $http.get(`${firebaseUrl}/channels/${key}/messages.json`)
       .success(function(messageArray) {
         if (messageArray) {
         let messageList = messageArray;
@@ -12,6 +12,32 @@ app.factory('messages', function($q, $http, firebaseUrl){
           messages.push(messageList[key]);
         });
       }
+        resolve(messages)
+      })
+      .error(function(error) {
+        reject(error);
+      })
+    });
+	};
+
+	let addId = function(channel,message, data){
+    return $q(function(resolve, reject) {
+      $http.patch(`${firebaseUrl}/channels/${channel}/messages/${message}.json`, data)
+      .success(function(messages) {
+      	console.log("what", `${firebaseUrl}/channels/${channel}/messages/${message}.json`)
+        resolve(messages)
+      })
+      .error(function(error) {
+        reject(error);
+      })
+    });
+	};
+
+	let deleteMessage = function(channel,message){
+    return $q(function(resolve, reject) {
+      $http.delete(`${firebaseUrl}/channels/${channel}/messages/${message}.json`)
+      .success(function(messages) {
+      	console.log("what", `${firebaseUrl}/channels/${channel}/messages/${message}.json`)
         resolve(messages)
       })
       .error(function(error) {
@@ -35,9 +61,9 @@ app.factory('messages', function($q, $http, firebaseUrl){
 		return textArray
 	}
 
-	let postMessage = function(userMessage){
+	let postMessage = function(userMessage, key){
 		return $q(function(resolve, reject) {
-      $http.post(`${firebaseUrl}/message.json`, userMessage)
+      $http.post(`${firebaseUrl}/channels/${key}/messages.json`, userMessage)
       .success(function(messages) {
         resolve(messages)
       })
@@ -62,7 +88,7 @@ app.factory('messages', function($q, $http, firebaseUrl){
 		}
 		if(match === true){
 			let index = url.indexOf("=") + 1;
-			key = url.substring(index, url.length - 1);
+			key = url.substring(index, url.length);
 		}
 		return key
   };
@@ -83,7 +109,7 @@ app.factory('messages', function($q, $http, firebaseUrl){
 		if(match === true){
 			let index = url.indexOf("=") + 1;
 			console.log("damnnn", url);
-			key = url.substring(1, url.length - 2);
+			key = url.substring(1, url.length);
 			console.log("whoa", key)
 		}
 		if(key === url){
@@ -91,5 +117,5 @@ app.factory('messages', function($q, $http, firebaseUrl){
 		}
 		return key
   }
-	return {getMessageList, postMessage, youtubeChecker, mediaChecker, filterText}
+	return {deleteMessage, addId, getMessageList, postMessage, youtubeChecker, mediaChecker, filterText}
 })
