@@ -54,7 +54,7 @@ app.config(function($routeProvider) {
         controller: 'ProfileCtrl'
     }).
     when('/conversations/:id', {
-        templateUrl: "views/conversations.html",
+        templateUrl: "views/messages.html",
         controller: 'ConversationCtrl'
     }).
     otherwise('/home');

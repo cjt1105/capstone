@@ -9,8 +9,10 @@
 </a>
 </div>
 <div ng-controller="SidebarCtrl">
-<div ng-controller="MyCtrl as ctrl">
-	<a class="material-icons" ng-click="ctrl.showConvoModal()"><img src="http://image.flaticon.com/icons/png/128/54/54443.png" alt="" id="add-channel"></a>
-</div>
-<a ng-repeat="info in convoInfo" ng-href="#/conversations/{{info.id}}">{{info.name}}</a>
+	<div ng-controller="MyCtrl as ctrl">
+		<a class="material-icons" ng-click="ctrl.showConvoModal()"><img src="http://image.flaticon.com/icons/png/128/54/54443.png" alt="" id="add-channel"></a>
+	</div>
+	<div ng-repeat="info in convoInfo">
+		<a  ng-href="#/conversations/{{info.id}}">{{info.name}}</a>
+	</div>
 </div>

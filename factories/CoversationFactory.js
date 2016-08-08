@@ -57,5 +57,32 @@ app.factory('conversations', function($q,$http,firebaseUrl){
       })
     });
 	}
-	return {createConvo, createKey, getMessages, getConvoList, postMessage}
+
+    let deleteMessage = function(channel,message){
+    return $q(function(resolve, reject) {
+      $http.delete(`${firebaseUrl}/conversations/${channel}/messages/${message}.json`)
+      .success(function(messages) {
+        console.log("what", `${firebaseUrl}/channels/${channel}/messages/${message}.json`)
+        resolve(messages)
+      })
+      .error(function(error) {
+        reject(error);
+      })
+    });
+  };
+
+  let addId = function(channel,message, data){
+    return $q(function(resolve, reject) {
+      $http.patch(`${firebaseUrl}/conversations/${channel}/messages/${message}.json`, data)
+      .success(function(messages) {
+        console.log("what", `${firebaseUrl}/channels/${channel}/messages/${message}.json`)
+        resolve(messages)
+      })
+      .error(function(error) {
+        reject(error);
+      })
+    });
+  };
+
+	return {addId, deleteMessage, createConvo, createKey, getMessages, getConvoList, postMessage}
 })

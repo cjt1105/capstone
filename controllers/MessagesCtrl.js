@@ -1,8 +1,27 @@
 app.controller("MessagesCtrl", function($scope, localStorageService, messages, $routeParams){
+	$scope.editMessage = false;
 	let key = $routeParams.id;
 	let currentUser = localStorageService.get("currentUser");
 	$scope.userMessage = null;
 	$scope.messageList = [];
+
+	$scope.edit = function(id){
+		console.log(id[id])
+	}
+	$scope.delete = function(id){
+		let channelKey = $routeParams.id;
+		messages.deleteMessage(channelKey,id)
+		.then(function(){
+			messages.getMessageList(key)
+			.then(function(messages){
+				$scope.messageList = [];
+				for(message in messages){
+					let current = messages[message];
+					$scope.messageList.push(current)
+				}
+			});
+		})
+	}
 
 	messages.getMessageList(key)
 	.then(function(messages){
@@ -17,7 +36,6 @@ app.controller("MessagesCtrl", function($scope, localStorageService, messages, $
   });
 
   var el = $("#userInput").emojioneArea();
-  console.log(el[0])
 
   $scope.getIframeSrc = function (videoId) {
   	return 'https://www.youtube.com/embed/' + videoId;
@@ -28,6 +46,7 @@ app.controller("MessagesCtrl", function($scope, localStorageService, messages, $
 		if(event.which === 13){
 			let name = currentUser.displayName;
 			let text = el[0].emojioneArea.getText();
+			console.log(text)
 			let youtubeKey = messages.youtubeChecker(text);
 			let mediaSource =	messages.mediaChecker(text);
 			let uid = currentUser.uid;
@@ -68,13 +87,16 @@ app.controller("MessagesCtrl", function($scope, localStorageService, messages, $
 				newMessage.isMedia = true;
 			};
 			messages.postMessage(newMessage, key)
-			.then(function(){
+			.then(function(message){
+				let messageKey = message.name;
+				let channelKey = $routeParams.id
+				let data = {id: messageKey}
+				messages.addId(channelKey, messageKey, data)
 				$scope.messageList = []
 				messages.getMessageList(key).then(function(messages){
 					for(message in messages){
 					let current = messages[message];
 					$scope.messageList.push(current);
-					console.log("messages", current.youtubeKey)
 					}
 				})
 			})

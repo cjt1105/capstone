@@ -65,7 +65,8 @@ app.controller("NavCtrl", function($scope, userFactory, $q, localStorageService,
 					$scope.loggedin = false;
 				})
 				console.log("WTZF")
-				// localStorageService.set("currentUser", "null")
+				localStorageService.set("currentUser", "null");
+				$location.path('home');
 			}
 		})
 	}

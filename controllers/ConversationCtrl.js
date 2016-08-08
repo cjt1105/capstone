@@ -10,6 +10,23 @@ app.controller('ConversationCtrl', function($scope, $timeout, $location, $route,
 		$scope.users = users;
 	});
 
+	$scope.delete = function(id){
+		let channelKey = $routeParams.id;
+		conversations.deleteMessage(channelKey,id)
+		.then(function(){
+			conversations.getMessages(channelKey)
+			.then(function(messages){
+				console.log("hahahaha", messages)
+				$scope.messageList = [];
+				for(message in messages){
+					let current = messages[message];
+					console.log("current", current)
+					$scope.messageList.push(current)
+				}
+			});
+		})
+	}
+
 	conversations.getMessages(key)
 	.then(function(messages){
 		if(messages != undefined | null){
@@ -100,14 +117,18 @@ app.controller('ConversationCtrl', function($scope, $timeout, $location, $route,
 				newMessage.isMedia = true;
 			};
 			conversations.postMessage(newMessage, key)
-			.then(function(){
-				$scope.messageList = []
-				conversations.getMessages(key)
-				.then(function(messages){
-					for(message in messages){
-					let current = messages[message];
-					$scope.messageList.push(current);
-					}
+			.then(function(message){
+				let data = {"id" : message.name}
+				conversations.addId(key, message.name, data)
+				.then(function(ha){
+					$scope.messageList = []
+					conversations.getMessages($routeParams.id)
+					.then(function(messages){
+						for(message in messages){
+						let current = messages[message];
+						$scope.messageList.push(current);
+						}
+					})
 				})
 			})
 		}

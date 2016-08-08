@@ -21,6 +21,7 @@
 }
 body {
     font-family: "Lato", sans-serif;
+    overflow: hidden;
 }
 .type {
 	display: inline;
@@ -28,33 +29,38 @@ body {
 
 #messageContainer {
 	background: #FFFFFF;
-	min-height: 500px;
+	min-height: 90vh;
     display: inline-block;
-    width: 100%;
-    overflow: hidden;
 
 }
+#messageWindow {
+    min-height: 85vh;
+    max-height: 85vh;
+    overflow: scroll;
+}
+
 .home-container {
     height: 450px;
+    text-align: center;
+    margin-top: 15%;
 }
-// .navbar {
-//     height: 40px;
-//     margin-left: 20.2%;
-//     display: inline-block;
-//     float: right;
-//     margin-bottom: none;
-//     width: 62.8%;
+#navbar {
+    margin-bottom: 0;
 
-// }
+}
 #sidebar {
     display: inline-block;
-    width: 17%;
-    min-height: 400px;
-    margin-top: none;
+    min-height: 95vh;
+    margin-top: 0;
+    background-color: #4D394B;
+    text-align: center;
 }
 .emojiContainer {
     width: 95%;
     // display: inline-block;
+}
+#emojiContainer {
+    margin-top: 20px;
 }
 #the-container {
     float: right;
@@ -63,34 +69,38 @@ body {
 .channelLinks {
     display: block;
 }
-#channels {
-    background-color: #4D394B;
-    width: 100%;
-    min-height: 650px;
-    margin-left: none;
-}
 .messagePicture {
-    width: 50px;
-    height: 50px;
+    width: 6.5vh;
+    height: 6.5vh;
     border-radius: 8%;
+    margin-left: 10px;
+    display: inline-block;
+}
+#messagePicture {
+    display: inline-block;
+}
+#messageBody {
+    display: inline-block;
+    padding-left: 10px;
+    vertical-align: center;
 }
 .messageName {
     color: black;
-    margin-left: 10px;
     font-weight: bold;
     font-size: 1.1em;
+    display: inline-block;
 }
 .timestamp {
     color: #9F9FA7;
     margin-left: 10px;
     font-weight: lighter;
     font-style:italic;
+    display: inline-block;
 }
 #filler {
-    width: 100px;
-    height: 40px;
-    background-color: #4D394B;
-    display: inline-block;
+   background-color: #4D394B;
+   min-height: 5vh;
+   margin-top: 0;
 }
 #container {
     width: 50%
